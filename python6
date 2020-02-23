@@ -1,0 +1,19 @@
+# python6
+import instaloader
+import Counter 
+import islice
+
+L = instaloader.Instaloader()
+onoma = input('Instagram name: ')
+profile = instaloader.Profile.from_username(L.context, onoma)
+p = []
+for post in islice(profile.get_posts(),20) :
+    post_comments = post.get_comments()
+    for comment in post_comments:
+        p.append(comment.owner.username)
+
+Counter = Counter(p) 
+best = Counter.most_common(1)
+print('ο χρηστης που εκανε τα περισσοτερα σχολια:')
+for i in range(len(best)):
+    print('1.',best[i][0])
